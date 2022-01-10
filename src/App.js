@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import AnalysisScreen from "./components/analysis";
+import Header from "./components/global/Header";
+import ManagementScreen from "./components/management";
+import RootModal from "./components/modals/RootModal";
+import SalesScreen from "./components/sales";
+import { RouterContext } from "./context/RouterContext";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const { tab } = useContext(RouterContext);
+    const Body = () => {
+        switch (tab) {
+            case "sales":
+                return <SalesScreen />;
+                break;
+            case "management":
+                return <ManagementScreen />;
+                break;
+            case "analysis":
+                return <AnalysisScreen />;
+                break;
+        }
+    };
+    return (
+        <>
+            <Header />
+            <Body />
+            <RootModal />
+        </>
+    );
+};
 
 export default App;
