@@ -33,7 +33,7 @@ const Header = () => {
     return (
         <AppBar position="static">
             <Toolbar className="justify-between">
-                <Typography variant="h6">Tap On Beat</Typography>
+                <Typography variant="h6">Fever Tree</Typography>
                 <Grid className='' container spacing={3}>
                     <Grid
                         className="cursor-pointer"

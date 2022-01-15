@@ -2,7 +2,6 @@ import { useContext } from "react";
 import AnalysisScreen from "./components/analysis";
 import Header from "./components/global/Header";
 import ManagementScreen from "./components/management";
-import RootModal from "./components/modals/RootModal";
 import SalesScreen from "./components/sales";
 import { RouterContext } from "./context/RouterContext";
 
@@ -25,7 +24,6 @@ const App = () => {
         <>
             <Header />
             <Body />
-            <RootModal />
         </>
     );
 };

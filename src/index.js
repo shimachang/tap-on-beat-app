@@ -5,6 +5,7 @@ import RouterProvider from "./context/RouterContext";
 import "./index.css";
 import dayjs from "dayjs";
 import ShowProvider from "./context/ShowContext";
+import { TapDataProvider } from "./context/TapDataContext";
 
 dayjs.locale("ja");
 
@@ -12,7 +13,9 @@ ReactDom.render(
     <React.StrictMode>
         <RouterProvider>
             <ShowProvider>
-                <App />
+                <TapDataProvider>
+                    <App />
+                </TapDataProvider>
             </ShowProvider>
         </RouterProvider>
     </React.StrictMode>,

@@ -1,9 +1,9 @@
 import TapBody from "./TapBody"
 
-const TapContainer = () => {
+const TapContainer = ({tapIndex, setCurrentIndex}) => {
     return (
-        <div className='grid-cols-2'>
-            <TapBody />
+        <div className='mx-4'>
+            <TapBody tapIndex={tapIndex} setCurrentIndex={setCurrentIndex} />
         </div>
     )
 }
