@@ -1,10 +1,10 @@
-import TapBody from "./TapBody"
+import TapBody from "./TapBody";
 
-const TapContainer = ({tapIndex, setCurrentIndex}) => {
+const TapContainer = ({ tapIndex, tastingSubmit }) => {
     return (
-        <div className='mx-4'>
-            <TapBody tapIndex={tapIndex} setCurrentIndex={setCurrentIndex} />
+        <div className="mx-4">
+            <TapBody tapIndex={tapIndex} tastingSubmit={tastingSubmit} />
         </div>
-    )
-}
-export default TapContainer
+    );
+};
+export default TapContainer;

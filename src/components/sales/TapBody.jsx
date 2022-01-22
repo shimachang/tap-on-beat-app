@@ -5,20 +5,17 @@ import { HelpOutlineOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import OrderAlert from "../global/OrderAlert";
 
-const TapBody = ({ tapIndex, setCurrentIndex }) => {
+const TapBody = ({ tapIndex, tastingSubmit }) => {
     const {
         setShowSellingWeightModal,
         setShowWasteModal,
-        setShowTastingModal,
         setShowInformationModal,
     } = useContext(ShowContext);
-    const { tapData } = useContext(TapDataContext);
-    const orderFlag = tapData[tapIndex].remaining < 2000 ? true: false;
-    
-
+    const { tapData, currentIndex, setCurrentIndex } = useContext(TapDataContext);
+    const orderFlag = tapData[tapIndex].remaining < 2000 ? true : false;
     return (
         <>
-            <div className="bg-green-100 py-6">
+            <div className="bg-gray-200 py-6 rounded-lg">
                 <div className="py-2 mb-2 border-gray-400 border-b-2">Tap{tapIndex + 1}</div>
                 <div className="inline-block border-red-400 border-b-4 my-4 text-xl">
                     {tapData[tapIndex].name}
@@ -32,25 +29,31 @@ const TapBody = ({ tapIndex, setCurrentIndex }) => {
                 >
                     <HelpOutlineOutlined />
                 </IconButton>
-                <div>{`売れた合計${tapData[tapIndex].soldQuantity} ml`}</div>
-                <div>{`累計販売実績 ${tapData[tapIndex].totalSales} 円`}</div>
-                <div>{`残量 ${tapData[tapIndex].remaining} ml`}</div>
-                <div>
-
-                {orderFlag && <OrderAlert />}
+                <div className="grid grid-cols-2">
+                    <div>売れた合計</div>
+                    <div> {`${tapData[tapIndex].soldQuantity} ml`}</div>
                 </div>
+                <div className="grid grid-cols-2">
+                    <div>累計販売実績</div>
+                    <div>{`${tapData[tapIndex].totalSales} 円`}</div>
+                </div>
+                <div className="grid grid-cols-2">
+                    <div>残量</div>
+                    <div>{`${tapData[tapIndex].remaining} ml`}</div>
+                </div>
+                <div>{orderFlag && <OrderAlert />}</div>
                 <div className="mt-6">
                     <button
-                        className="bg-blue-500 hover:bg-blue-600 px-2 py-2 mb-2 rounded text-white"
+                        className="bg-yellow-300 hover:bg-yellow-400 px-2 py-2 mb-2 rounded-xl text-gray-700"
                         onClick={() => {
-                            setShowTastingModal(true);
+                            tastingSubmit(tapIndex)
                             setCurrentIndex(tapIndex);
                         }}
                     >
                         テイスティング
                     </button>
                     <button
-                        className="bg-blue-500 hover:bg-blue-600 px-8 py-2 mb-2 rounded text-white"
+                        className="bg-yellow-300 hover:bg-yellow-400 px-8 py-2 mb-2 rounded-xl text-gray-700"
                         onClick={() => {
                             setShowSellingWeightModal(true);
                             setCurrentIndex(tapIndex);
@@ -59,7 +62,7 @@ const TapBody = ({ tapIndex, setCurrentIndex }) => {
                         量り売り
                     </button>
                     <button
-                        className="bg-blue-500 hover:bg-blue-600 px-12 py-2 mb-2 rounded text-white"
+                        className="bg-yellow-300 hover:bg-yellow-400 px-12 py-2 mb-2 rounded-xl text-gray-700"
                         onClick={() => {
                             setShowWasteModal(true);
                             setCurrentIndex(tapIndex);

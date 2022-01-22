@@ -2,16 +2,19 @@ import { useContext } from "react";
 import { ShowContext } from "../../context/ShowContext";
 import CloseIcon from "@mui/icons-material/Close";
 import { TapDataContext } from "../../context/TapDataContext";
+import Calculator from "./Calculator";
 
 const SellingWeightModal = ({
     sellingSubmit,
-    sellingWeightQuantity,
-    setSellingWeightQuantity,
+    sellingQuantity,
+    setSellingQuantity,
+    sellingType,
+    setSellingType,
     currentIndex,
 }) => {
     const { setShowSellingWeightModal } = useContext(ShowContext);
-    console.log(currentIndex);
     const { tapData } = useContext(TapDataContext);
+    const discountValue = sellingType === "BPM" ? Math.ceil(sellingQuantity * 0.15) : 0;
     return (
         <div className="h-screen w-screen fixed left-0 top-0 z-10">
             <div
@@ -20,38 +23,41 @@ const SellingWeightModal = ({
             >
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className="w-72 mt-2 bg-white relative rounded-lg shadow-2xl"
+                    className="w-1/2 mt-2 bg-white relative rounded-lg shadow-2xl"
                 >
-                    <header className="bg-gray-100 px-4 py-2 rounded-t-lg flex justify-between items-center">
+                    <header className="bg-gray-600 px-4 py-2 rounded-t-lg flex justify-between items-center">
                         <button onClick={() => setShowSellingWeightModal(false)}>
                             <CloseIcon />
                         </button>
                     </header>
-                    <div className="bg-green-50 py-4 px-2">
+                    <div className="bg-gray-200 py-4 px-2">
                         <form>
-                            <div className="py-3">量り売りの量を入力してください</div>
-                            <input
-                                type="tel"
-                                maxLength="6"
-                                className="inline-block w-5/6 p-2 border-box border-2 my-2 leading-8"
-                                placeholder="quantity"
-                                onChange={(e) => setSellingWeightQuantity(e.target.value)}
-                            />{" "}
-                            ml
-                            <div className="py-4 mb-4">
-                                {sellingWeightQuantity}ml × {tapData[currentIndex].cost} ={" "}
-                                {Math.ceil(sellingWeightQuantity * tapData[currentIndex].cost)}円
+                            <div className="py-8">グラウラーの種類を選択してください</div>
+                            <Calculator
+                                sellingQuantity={sellingQuantity}
+                                setSellingQuantity={setSellingQuantity}
+                                sellingType={sellingType}
+                                setSellingType={setSellingType}
+                            />
+                            <div className="py-6 mb-4 mx-2 px-2 text-2xl bg-white rounded-lg">
+                                {sellingQuantity || 0}ml × {tapData[currentIndex].cost}
+                                {sellingType === "BPM" &&
+                                    ` - ${Math.ceil(sellingQuantity * 0.15)}`}{" "}
+                                ={" "}
+                                {Math.ceil(sellingQuantity * tapData[currentIndex].cost) -
+                                    discountValue}{" "}
+                                円
                             </div>
                             <button
                                 type="submit"
                                 onClick={(e) => sellingSubmit(e, currentIndex)}
-                                className="bg-blue-500 hover:bg-blue-600 px-8 py-4 rounded text-white"
+                                className="bg-yellow-300 hover:bg-yellow-400 px-24 py-4 rounded-lg  text-3xl"
                             >
-                                送信
+                                決定
                             </button>
                         </form>
                     </div>
-                    <footer className="bg-gray-100 h-8 px-4 py-2 rounded-b-lg"></footer>
+                    <footer className="bg-gray-600 h-12 px-4 py-2 rounded-b-lg"></footer>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ export const ShowProvider = ({ children }) => {
     const [showWasteModal, setShowWasteModal] = useState(false);
     const [showTastingModal, setShowTastingModal] = useState(false);
     const [showInformationModal, setShowInformationModal] = useState(false);
+    const [showSideBar, setShowSideBar] = useState(false);
     const value = {
         showSellingWeightModal,
         setShowSellingWeightModal,
@@ -15,6 +16,8 @@ export const ShowProvider = ({ children }) => {
         setShowTastingModal,
         showInformationModal,
         setShowInformationModal,
+        showSideBar,
+        setShowSideBar,
     };
     return <ShowContext.Provider value={value}>{children}</ShowContext.Provider>;
 };

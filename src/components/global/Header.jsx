@@ -1,16 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import DragHandleIcon from "@mui/icons-material/DragHandle";
 import dig from "object-dig";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { RouterContext } from "../../context/RouterContext";
-import { Grid } from "@mui/material";
-
-
+import { IconButton } from "@mui/material";
+import { ShowContext } from "../../context/ShowContext";
 
 const Header = () => {
-    const { setTab } = useContext(RouterContext);
+    const { showSideBar, setShowSideBar } = useContext(ShowContext);
 
     // const buttonRender = () => {
     //     let buttonDom;
@@ -31,41 +27,15 @@ const Header = () => {
     // };
 
     return (
-        <AppBar position="static">
-            <Toolbar className="justify-between">
-                <Typography variant="h6">Fever Tree</Typography>
-                <Grid className='' container spacing={3}>
-                    <Grid
-                        className="cursor-pointer"
-                        onClick={() => setTab("sales")}
-                        item
-                        xs={4}
-                        md={3}
-                    >
-                        販売画面
-                    </Grid>
-                    <Grid
-                        className="cursor-pointer"
-                        onClick={() => setTab("management")}
-                        item
-                        xs={4}
-                        md={3}
-                    >
-                        管理画面
-                    </Grid>
-                    <Grid
-                        className="cursor-pointer"
-                        onClick={() => setTab("analysis")}
-                        item
-                        xs={4}
-                        md={3}
-                    >
-                        解析画面
-                    </Grid>
-                </Grid>
-                {/* {buttonRender()} */}
-            </Toolbar>
-        </AppBar>
+        <div className="flex justify-between items-center w-full h-20 bg-gray-600">
+            <p className="text-4xl pl-6 text-yellow-300">Fever Tree</p>
+            <IconButton onClick={() => setShowSideBar(showSideBar ? false : true)}>
+                <DragHandleIcon
+                    fontSize={"large"}
+                    className="text-yellow-300 border-yellow-300 border-2 rounded-full"
+                />
+            </IconButton>
+        </div>
     );
 };
 

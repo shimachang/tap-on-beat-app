@@ -7,7 +7,7 @@ export const TapDataProvider = ({ children }) => {
             Manufacturer: "瑠璃",
             name: "Ruri",
             cost: 1.5,
-            tastingPlace: 500,
+            tastingPrice: 500,
             remaining: 10000,
             soldQuantity: 0,
             totalSales: 0,
@@ -18,7 +18,7 @@ export const TapDataProvider = ({ children }) => {
             Manufacturer: "ヤッホーブルーイング",
             name: "よなよなエール",
             cost: 2,
-            tastingPlace: 600,
+            tastingPrice: 600,
             remaining: 20000,
             soldQuantity: 0,
             totalSales: 0,
@@ -28,9 +28,12 @@ export const TapDataProvider = ({ children }) => {
     ];
 
     const [tapData, setTapData] = useState(initData);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const value = {
         tapData,
         setTapData,
+        currentIndex,
+        setCurrentIndex,
     };
     return <TapDataContext.Provider value={value}>{children}</TapDataContext.Provider>;
 };
